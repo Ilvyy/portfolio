@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Designer Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #3498db;
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 80px;
+        }
+
+        .page {
+            display: none;
+            min-height: calc(100vh - 80px);
+            padding: 3rem 0;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-title {
+            font-size: 3rem;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* About Page */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: center;
+            margin-top: 2rem;
+        }
+
+        .about-image {
+            text-align: center;
+        }
+
+        .profile-placeholder {
+            width: 300px;
+            height: 300px;
+            background: #ecf0f1;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #95a5a6;
+            font-size: 1.1rem;
+            margin: 0 auto;
+        }
+
+        .about-text h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        /* About Page Additional Sections */
+        .about-sections {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .about-section {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .about-section h3 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .about-section p {
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        /* Portfolio Page */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .portfolio-item {
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .portfolio-image {
+            width: 100%;
+            height: 200px;
+            background: #ecf0f1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #95a5a6;
+            font-size: 1rem;
+        }
+
+        .portfolio-info {
+            padding: 1.5rem;
+        }
+
+        .portfolio-info h3 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .portfolio-info p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .try-me-btn {
+            background: #3498db;
+            color: #fff;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .try-me-btn:hover {
+            background: #2980b9;
+        }
+
+        /* Project Detail Page */
+        .project-detail {
+            max-width: 1000px;
+            margin: 2rem auto;
+        }
+
+        .project-hero {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .project-main-image {
+            width: 100%;
+            max-width: 800px;
+            height: 400px;
+            background: #ecf0f1;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #95a5a6;
+            font-size: 1.2rem;
+            margin: 0 auto 2rem;
+        }
+
+        .project-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .project-section h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .project-section p {
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .project-specs {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .project-specs ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .project-specs li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e9ecef;
+            color: #666;
+        }
+
+        .project-specs li:last-child {
+            border-bottom: none;
+        }
+
+        .project-specs strong {
+            color: #2c3e50;
+            margin-right: 1rem;
+        }
+
+        .back-btn {
+            background: #95a5a6;
+            color: #fff;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-bottom: 2rem;
+        }
+
+        .back-btn:hover {
+            background: #7f8c8d;
+        }
+
+        /* Services Page */
+        .services-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-images {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+        }
+
+        .service-image {
+            width: 100%;
+            height: 120px;
+            background: #ecf0f1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #95a5a6;
+            font-size: 0.85rem;
+            text-align: center;
+            padding: 0.5rem;
+            border-right: 1px solid #ddd;
+        }
+
+        .service-image:last-child {
+            border-right: none;
+        }
+
+        .service-content {
+            padding: 2rem;
+        }
+
+        .service-content h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .service-content p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 1rem;
+            max-width: 800px;
+        }
+
+        /* Future Vision Page */
+        .vision-content {
+            max-width: 800px;
+            margin: 2rem auto;
+            text-align: center;
+        }
+
+        .vision-item {
+            background: #fff;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .vision-item h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .vision-item p {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: #fff;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .about-sections {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .profile-placeholder {
+                width: 200px;
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">Your Name</div>
+            <ul class="nav-links">
+                <li><a href="#" onclick="showPage('about')" class="nav-link active">About</a></li>
+                <li><a href="#" onclick="showPage('portfolio')" class="nav-link">Portfolio</a></li>
+                <li><a href="#" onclick="showPage('services')" class="nav-link">Services</a></li>
+                <li><a href="#" onclick="showPage('vision')" class="nav-link">Future Vision</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- About Page -->
+        <section id="about" class="page active">
+            <div class="container">
+                <div class="page-header">
+                    <h1 class="page-title">About Me</h1>
+                    <p class="page-subtitle">Passionate designer creating beautiful and functional experiences</p>
+                </div>
+                <div class="about-content">
+                    <div class="about-image">
+                        <div class="profile-placeholder">Your Photo Here</div>
+                    </div>
+                    <div class="about-text">
+                        <h3>Hello, I'm a Creative Designer</h3>
+                        <p>Welcome to my portfolio! I'm passionate about creating visually stunning and user-friendly designs that make a lasting impact. With years of experience in the design industry, I specialize in bringing ideas to life through innovative and thoughtful design solutions.</p>
+                        <p>My approach combines creativity with strategic thinking, ensuring that every project not only looks beautiful but also serves its intended purpose effectively. I believe in the power of good design to transform businesses and enhance user experiences.</p>
+                        <p>When I'm not designing, you can find me exploring new design trends, sketching ideas, or finding inspiration in everyday life. I'm always excited to take on new challenges and collaborate with like-minded individuals.</p>
+                    </div>
+                </div>
+                
+                <div class="about-sections">
+                    <div class="about-section">
+                        <h3>Identity</h3>
+                        <p>As a designer, I believe in the power of visual storytelling to connect people and ideas. My identity is rooted in curiosity, empathy, and a relentless pursuit of meaningful design solutions that make a difference.</p>
+                        <p>I'm driven by the challenge of translating complex concepts into simple, elegant visual communications. Every project is an opportunity to learn something new and push creative boundaries while staying true to the client's vision and goals.</p>
+                        <p>My approach combines analytical thinking with creative intuition, always keeping the end user at the center of every design decision. I value collaboration, open communication, and the iterative process that leads to exceptional results.</p>
+                    </div>
+                    
+                    <div class="about-section">
+                        <h3>Vision</h3>
+                        <p>I envision a world where design serves as a bridge between technology and humanity, creating experiences that are not only beautiful but also accessible, sustainable, and meaningful to diverse communities.</p>
+                        <p>My goal is to contribute to projects that have a positive impact on society, whether through promoting environmental awareness, improving user experiences, or helping businesses communicate their values authentically.</p>
+                        <p>I strive to be at the forefront of design innovation, continuously learning and adapting to new technologies and methodologies while maintaining a strong foundation in timeless design principles.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Page -->
+        <section id="portfolio" class="page">
+            <div class="container">
+                <div class="page-header">
+                    <h1 class="page-title">Portfolio</h1>
+                    <p class="page-subtitle">A showcase of my recent work and creative projects</p>
+                </div>
+                <div class="portfolio-grid">
+                    <div class="portfolio-item">
+                        <div class="portfolio-image">Project Image 1</div>
+                        <div class="portfolio-info">
+                            <h3>Brand Identity Design</h3>
+                            <p>Complete brand identity package including logo, typography, and color palette for a modern tech startup.</p>
+                            <button class="try-me-btn" onclick="showProjectDetail()">Try Me</button>
+                        </div>
+                    </div>
+                    <div class="portfolio-item">
+                        <div class="portfolio-image">Project Image 2</div>
+                        <div class="portfolio-info">
+                            <h3>Website Redesign</h3>
+                            <p>User experience focused website redesign that increased conversion rates by 40% and improved user engagement.</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item">
+                        <div class="portfolio-image">Project Image 3</div>
+                        <div class="portfolio-info">
+                            <h3>Mobile App Interface</h3>
+                            <p>Clean and intuitive mobile app interface design for a fitness tracking application with focus on usability.</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item">
+                        <div class="portfolio-image">Project Image 4</div>
+                        <div class="portfolio-info">
+                            <h3>Print Design Campaign</h3>
+                            <p>Creative print advertising campaign that successfully launched a new product line across multiple markets.</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item">
+                        <div class="portfolio-image">Project Image 5</div>
+                        <div class="portfolio-info">
+                            <h3>E-commerce Platform</h3>
+                            <p>Complete e-commerce platform design with focus on user journey optimization and conversion enhancement.</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item">
+                        <div class="portfolio-image">Project Image 6</div>
+                        <div class="portfolio-info">
+                            <h3>Packaging Design</h3>
+                            <p>Sustainable packaging design solution that reduced environmental impact while maintaining brand appeal.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Page -->
+        <section id="services" class="page">
+            <div class="container">
+                <div class="page-header">
+                    <h1 class="page-title">Services</h1>
+                    <p class="page-subtitle">Comprehensive design solutions tailored to your needs</p>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-images">
+                            <div class="service-image">Logo Design Example</div>
+                            <div class="service-image">Brand Guidelines</div>
+                            <div class="service-image">Business Cards</div>
+                            <div class="service-image">Brand Applications</div>
+                        </div>
+                        <div class="service-content">
+                            <h3>Brand Identity</h3>
+                            <p>Complete brand identity development including logo design, typography selection, color palettes, and brand guidelines to establish a strong visual presence. I work closely with clients to understand their vision and create memorable brand experiences.</p>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-images">
+                            <div class="service-image">Homepage Design</div>
+                            <div class="service-image">Mobile Layout</div>
+                            <div class="service-image">Landing Pages</div>
+                            <div class="service-image">E-commerce</div>
+                        </div>
+                        <div class="service-content">
+                            <h3>Web Design</h3>
+                            <p>Modern, responsive website design that combines aesthetic appeal with optimal user experience and conversion-focused layouts. From concept to launch, I create websites that engage visitors and drive results.</p>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-images">
+                            <div class="service-image">Mobile Apps</div>
+                            <div class="service-image">User Flow</div>
+                            <div class="service-image">Wireframes</div>
+                            <div class="service-image">Prototypes</div>
+                        </div>
+                        <div class="service-content">
+                            <h3>UI/UX Design</h3>
+                            <p>User-centered interface design for web and mobile applications with emphasis on usability, accessibility, and engaging user experiences. I focus on creating intuitive designs that users love to interact with.</p>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-images">
+                            <div class="service-image">Brochures</div>
+                            <div class="service-image">Posters</div>
+                            <div class="service-image">Packaging</div>
+                            <div class="service-image">Marketing Materials</div>
+                        </div>
+                        <div class="service-content">
+                            <h3>Print Design</h3>
+                            <p>Professional print design services including brochures, business cards, posters, and marketing materials with attention to detail and quality. I ensure your printed materials make a lasting impression and communicate your message effectively.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Project Detail Page -->
+        <section id="project-detail" class="page">
+            <div class="container">
+                <button class="back-btn" onclick="showPage('portfolio')">← Back to Portfolio</button>
+                <div class="project-detail">
+                    <div class="project-hero">
+                        <h1 class="page-title">Brand Identity Design</h1>
+                        <p class="page-subtitle">Complete brand transformation for TechFlow Solutions</p>
+                        <div class="project-main-image">Main Project Showcase Image</div>
+                    </div>
+                    
+                    <div class="project-details">
+                        <div class="project-section">
+                            <h3>Project Overview</h3>
+                            <p>TechFlow Solutions approached me to create a complete brand identity that would position them as a forward-thinking technology company. The challenge was to develop a visual identity that conveyed both professionalism and innovation while remaining approachable to their diverse clientele.</p>
+                            
+                            <p>The project encompassed logo design, color palette development, typography selection, and comprehensive brand guidelines. I worked closely with their team to understand their values, target audience, and long-term vision for the company.</p>
+                            
+                            <h3>Design Process</h3>
+                            <p>The design process began with extensive research into the technology sector and competitor analysis. I conducted workshops with the client to understand their brand personality and values. Through iterative design sessions, we developed a logo that combines geometric precision with organic flow, representing the balance between technology and human-centered design.</p>
+                            
+                            <p>The color palette features a sophisticated blue as the primary color, complemented by energetic accent colors that can be used across various applications. The typography system includes both a modern sans-serif for headings and a clean, readable font for body text.</p>
+                        </div>
+                        
+                        <div class="project-section">
+                            <h3>Results & Impact</h3>
+                            <p>The new brand identity successfully launched across all company touchpoints, including website, business cards, letterheads, and digital applications. The client reported increased brand recognition and a more professional perception from both clients and partners.</p>
+                            
+                            <p>The cohesive brand system has enabled TechFlow Solutions to present a consistent image across all platforms, supporting their growth from a startup to an established player in their market segment.</p>
+                            
+                            <div class="project-specs">
+                                <h3>Project Specifications</h3>
+                                <ul>
+                                    <li><strong>Client:</strong> TechFlow Solutions</li>
+                                    <li><strong>Industry:</strong> Technology Services</li>
+                                    <li><strong>Duration:</strong> 6 weeks</li>
+                                    <li><strong>Deliverables:</strong> Logo, Brand Guidelines, Business Cards, Letterhead</li>
+                                    <li><strong>Tools Used:</strong> Adobe Illustrator, Photoshop, InDesign</li>
+                                    <li><strong>Year:</strong> 2024</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Future Vision Page -->
+        <section id="vision" class="page">
+            <div class="container">
+                <div class="page-header">
+                    <h1 class="page-title">Future Vision</h1>
+                    <p class="page-subtitle">Where design meets innovation and tomorrow's possibilities</p>
+                </div>
+                <div class="vision-content">
+                    <div class="vision-item">
+                        <h3>Sustainable Design Philosophy</h3>
+                        <p>The future of design lies in sustainability and environmental responsibility. I envision creating designs that not only look beautiful but also contribute to a better world through eco-conscious materials, processes, and messaging that promotes environmental awareness.</p>
+                    </div>
+                    <div class="vision-item">
+                        <h3>AI-Enhanced Creative Process</h3>
+                        <p>Embracing artificial intelligence as a creative partner, not a replacement. I see AI helping to streamline repetitive tasks while allowing designers to focus more on strategic thinking, innovation, and the human elements that make design truly meaningful.</p>
+                    </div>
+                    <div class="vision-item">
+                        <h3>Immersive Design Experiences</h3>
+                        <p>The future holds exciting possibilities with AR, VR, and mixed reality technologies. I'm passionate about exploring how these technologies can create more engaging, interactive, and memorable design experiences that bridge the physical and digital worlds.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Your Name. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Internal JavaScript for page navigation -->
+    <script>
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update active navigation link
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => link.classList.remove('active'));
+            
+            // Find the nav link that corresponds to the page and make it active
+            const activeLink = document.querySelector(`[onclick="showPage('${pageId}')"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+        }
+
+        function showProjectDetail() {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // Show project detail page
+            document.getElementById('project-detail').classList.add('active');
+            
+            // Remove active class from all nav links since this is a detail page
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => link.classList.remove('active'));
+        }
+    </script>
+
+    <!-- Add your external JavaScript files here -->
+    <!-- Example: <script src="your-external-script.js"></script> -->
+    <!-- You can add multiple external scripts as needed -->
+    
+</body>
+</html>
