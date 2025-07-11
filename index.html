@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Designer Portfolio</title>
+    <title>Ilvy - Designer Portfolio</title>
     <style>
         * {
             margin: 0;
@@ -32,6 +32,7 @@
             width: 100%;
             top: 0;
             z-index: 1000;
+            backdrop-filter: blur(10px);
         }
 
         nav {
@@ -42,9 +43,13 @@
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: bold;
             color: #2c3e50;
+            background: linear-gradient(135deg, #f8bbd9, #e8a5c4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .nav-links {
@@ -57,13 +62,34 @@
             text-decoration: none;
             color: #333;
             font-weight: 500;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
             cursor: pointer;
+            position: relative;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
         }
 
         .nav-links a:hover,
         .nav-links a.active {
-            color: #3498db;
+            color: #f8bbd9;
+            background: rgba(248, 187, 217, 0.1);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #f8bbd9, #e8a5c4);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 80%;
         }
 
         /* Main Content */
@@ -75,10 +101,13 @@
             display: none;
             min-height: calc(100vh - 80px);
             padding: 3rem 0;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
         }
 
         .page.active {
             display: block;
+            opacity: 1;
         }
 
         .page-header {
@@ -90,6 +119,20 @@
             font-size: 3rem;
             color: #2c3e50;
             margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #f8bbd9, #e8a5c4);
+            border-radius: 2px;
         }
 
         .page-subtitle {
@@ -115,20 +158,26 @@
         .profile-placeholder {
             width: 300px;
             height: 300px;
-            background: #ecf0f1;
+            background: linear-gradient(135deg, #f8bbd9, #e8a5c4);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #95a5a6;
+            color: #fff;
             font-size: 1.1rem;
             margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(248, 187, 217, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-placeholder:hover {
+            transform: scale(1.05);
         }
 
         .about-text h3 {
             color: #2c3e50;
             margin-bottom: 1rem;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
         }
 
         .about-text p {
@@ -148,8 +197,25 @@
         .about-section {
             background: #fff;
             padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #f8bbd9, #e8a5c4);
+        }
+
+        .about-section:hover {
+            transform: translateY(-5px);
         }
 
         .about-section h3 {
@@ -174,25 +240,44 @@
 
         .portfolio-item {
             background: #fff;
-            border-radius: 10px;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
         }
 
         .portfolio-item:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(248, 187, 217, 0.2);
         }
 
         .portfolio-image {
             width: 100%;
             height: 200px;
-            background: #ecf0f1;
+            background: linear-gradient(135deg, #f8bbd9, #e8a5c4);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #95a5a6;
+            color: #fff;
             font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portfolio-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .portfolio-item:hover .portfolio-image::before {
+            left: 100%;
         }
 
         .portfolio-info {
@@ -202,28 +287,32 @@
         .portfolio-info h3 {
             color: #2c3e50;
             margin-bottom: 0.5rem;
+            font-size: 1.2rem;
         }
 
         .portfolio-info p {
             color: #666;
             font-size: 0.9rem;
             margin-bottom: 1rem;
+            line-height: 1.6;
         }
 
         .try-me-btn {
-            background: #3498db;
+            background: linear-gradient(135deg, #f8bbd9, #e8a5c4);
             color: #fff;
             border: none;
             padding: 0.75rem 1.5rem;
-            border-radius: 5px;
+            border-radius: 25px;
             font-size: 0.9rem;
             font-weight: 500;
             cursor: pointer;
-            transition: background 0.3s ease;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(248, 187, 217, 0.3);
         }
 
         .try-me-btn:hover {
-            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(248, 187, 217, 0.4);
         }
 
         /* Project Detail Page */
@@ -241,14 +330,15 @@
             width: 100%;
             max-width: 800px;
             height: 400px;
-            background: #ecf0f1;
-            border-radius: 10px;
+            background: linear-gradient(135deg, #f8bbd9, #e8a5c4);
+            border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #95a5a6;
+            color: #fff;
             font-size: 1.2rem;
             margin: 0 auto 2rem;
+            box-shadow: 0 15px 35px rgba(248, 187, 217, 0.3);
         }
 
         .project-details {
@@ -273,7 +363,8 @@
         .project-specs {
             background: #f8f9fa;
             padding: 1.5rem;
-            border-radius: 8px;
+            border-radius: 12px;
+            border-left: 4px solid #f8bbd9;
         }
 
         .project-specs ul {
@@ -297,19 +388,20 @@
         }
 
         .back-btn {
-            background: #95a5a6;
+            background: linear-gradient(135deg, #95a5a6, #7f8c8d);
             color: #fff;
             border: none;
             padding: 0.75rem 1.5rem;
-            border-radius: 5px;
+            border-radius: 25px;
             font-size: 0.9rem;
             cursor: pointer;
-            transition: background 0.3s ease;
+            transition: all 0.3s ease;
             margin-bottom: 2rem;
         }
 
         .back-btn:hover {
-            background: #7f8c8d;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(149, 165, 166, 0.3);
         }
 
         /* Services Page */
@@ -322,9 +414,9 @@
 
         .service-card {
             background: #fff;
-            border-radius: 10px;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             transition: transform 0.3s ease;
             width: 100%;
             max-width: 1200px;
@@ -343,20 +435,37 @@
 
         .service-image {
             width: 100%;
-            height: 120px;
-            background: #ecf0f1;
+            height: 250px;
+            background: linear-gradient(135deg, #f8bbd9, #e8a5c4);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #95a5a6;
-            font-size: 0.85rem;
+            color: #fff;
+            font-size: 1rem;
             text-align: center;
-            padding: 0.5rem;
-            border-right: 1px solid #ddd;
+            padding: 1rem;
+            border-right: 1px solid rgba(255,255,255,0.2);
+            position: relative;
+            overflow: hidden;
         }
 
         .service-image:last-child {
             border-right: none;
+        }
+
+        .service-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .service-card:hover .service-image::before {
+            left: 100%;
         }
 
         .service-content {
@@ -387,8 +496,25 @@
             background: #fff;
             padding: 2rem;
             margin-bottom: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vision-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #f8bbd9, #e8a5c4);
+        }
+
+        .vision-item:hover {
+            transform: translateY(-5px);
         }
 
         .vision-item h3 {
@@ -404,7 +530,7 @@
 
         /* Footer */
         footer {
-            background: #2c3e50;
+            background: linear-gradient(135deg, #2c3e50, #34495e);
             color: #fff;
             text-align: center;
             padding: 2rem 0;
@@ -417,8 +543,13 @@
                 gap: 1rem;
             }
 
+            .nav-links a {
+                padding: 0.3rem 0.8rem;
+                font-size: 0.9rem;
+            }
+
             .page-title {
-                font-size: 2rem;
+                font-size: 2.5rem;
             }
 
             .about-content {
@@ -432,8 +563,40 @@
             }
 
             .profile-placeholder {
+                width: 250px;
+                height: 250px;
+            }
+
+            .project-details {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .service-images {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .service-image {
+                height: 200px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .profile-placeholder {
                 width: 200px;
                 height: 200px;
+            }
+
+            .service-images {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -441,18 +604,17 @@
 <body>
     <header>
         <nav class="container">
-            <div class="logo">Your Name</div>
+            <div class="logo">Ilvy</div>
             <ul class="nav-links">
                 <li><a href="#" onclick="showPage('about')" class="nav-link active">About</a></li>
                 <li><a href="#" onclick="showPage('portfolio')" class="nav-link">Portfolio</a></li>
-                <li><a href="#" onclick="showPage('services')" class="nav-link">Services</a></li>
+                <li><a href="#" onclick="showPage('services')" class="nav-link">Reflections</a></li>
                 <li><a href="#" onclick="showPage('vision')" class="nav-link">Future Vision</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <!-- About Page -->
         <section id="about" class="page active">
             <div class="container">
                 <div class="page-header">
@@ -464,7 +626,7 @@
                         <div class="profile-placeholder">Your Photo Here</div>
                     </div>
                     <div class="about-text">
-                        <h3>Hello, I'm a Creative Designer</h3>
+                        <h3>Hello, I'm Ilvy</h3>
                         <p>Welcome to my portfolio! I'm passionate about creating visually stunning and user-friendly designs that make a lasting impact. With years of experience in the design industry, I specialize in bringing ideas to life through innovative and thoughtful design solutions.</p>
                         <p>My approach combines creativity with strategic thinking, ensuring that every project not only looks beautiful but also serves its intended purpose effectively. I believe in the power of good design to transform businesses and enhance user experiences.</p>
                         <p>When I'm not designing, you can find me exploring new design trends, sketching ideas, or finding inspiration in everyday life. I'm always excited to take on new challenges and collaborate with like-minded individuals.</p>
@@ -489,7 +651,6 @@
             </div>
         </section>
 
-        <!-- Portfolio Page -->
         <section id="portfolio" class="page">
             <div class="container">
                 <div class="page-header">
@@ -544,11 +705,10 @@
             </div>
         </section>
 
-        <!-- Services Page -->
         <section id="services" class="page">
             <div class="container">
                 <div class="page-header">
-                    <h1 class="page-title">Services</h1>
+                    <h1 class="page-title">Reflections</h1>
                     <p class="page-subtitle">Comprehensive design solutions tailored to your needs</p>
                 </div>
                 <div class="services-grid">
@@ -600,11 +760,46 @@
                             <p>Professional print design services including brochures, business cards, posters, and marketing materials with attention to detail and quality. I ensure your printed materials make a lasting impression and communicate your message effectively.</p>
                         </div>
                     </div>
+                    <div class="service-card">
+                        <div class="service-images">
+                            <div class="service-image">Intro Animation</div>
+                            <div class="service-image">Logo Sting</div>
+                            <div class="service-image">Explainer Video</div>
+                            <div class="service-image">UI Animation</div>
+                        </div>
+                        <div class="service-content">
+                            <h3>Motion Graphics</h3>
+                            <p>Engaging motion graphics and animations that bring your brand's story to life. From logo animations to explainer videos, I create dynamic content that captures attention and enhances user engagement.</p>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-images">
+                            <div class="service-image">Custom Icons</div>
+                            <div class="service-image">Character Design</div>
+                            <div class="service-image">Infographics</div>
+                            <div class="service-image">Editorial Illustrations</div>
+                        </div>
+                        <div class="service-content">
+                            <h3>Custom Illustration</h3>
+                            <p>Unique and creative illustrations tailored to your brand's style. I produce custom icons, characters, and visuals that add a personal touch to your projects and make your content stand out.</p>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-images">
+                            <div class="service-image">Instagram Post</div>
+                            <div class="service-image">Facebook Banner</div>
+                            <div class="service-image">Animated Story</div>
+                            <div class="service-image">Ad Campaign Visual</div>
+                        </div>
+                        <div class="service-content">
+                            <h3>Social Media Graphics</h3>
+                            <p>Eye-catching visuals designed for your social media channels. I create a consistent and appealing look for your posts, stories, and campaigns to boost engagement and grow your online presence.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Project Detail Page -->
         <section id="project-detail" class="page">
             <div class="container">
                 <button class="back-btn" onclick="showPage('portfolio')">← Back to Portfolio</button>
@@ -651,7 +846,6 @@
             </div>
         </section>
 
-        <!-- Future Vision Page -->
         <section id="vision" class="page">
             <div class="container">
                 <div class="page-header">
@@ -678,11 +872,10 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Your Name. All rights reserved.</p>
+            <p>&copy; 2025 Ilvy. All rights reserved.</p>
         </div>
     </footer>
 
-    <!-- Internal JavaScript for page navigation -->
     <script>
         function showPage(pageId) {
             // Hide all pages
@@ -715,11 +908,29 @@
             const navLinks = document.querySelectorAll('.nav-link');
             navLinks.forEach(link => link.classList.remove('active'));
         }
+
+        // Add smooth scrolling behavior
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add entrance animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+
+            // Observe all cards and sections for animation
+            const animatedElements = document.querySelectorAll('.portfolio-item, .about-section, .vision-item, .service-card');
+            animatedElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+        });
     </script>
 
-    <!-- Add your external JavaScript files here -->
-    <!-- Example: <script src="your-external-script.js"></script> -->
-    <!-- You can add multiple external scripts as needed -->
-    
-</body>
+    </body>
 </html>
