@@ -6,7 +6,7 @@ var options = {
     styling: {
       avatarShape: "rounded",
       avatarUrl:
-        "../resources/Mental_health_bloem1.png",
+        "docs/assets/images/Mental_health_bloem1.png",
       primaryColor: "#A98AB0",
       chatBubbles:{
         userBackgroundColor: "#C6E9EA",
