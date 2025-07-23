@@ -11,6 +11,16 @@ img {
 .profile-image {
     max-height:100%; 
     max-width:100%;
+    position: relative;
+    top : 30px;
+    right : 30px;
+}
+
+.profile-image-future {
+    max-height:100%; 
+    max-width:100%;
+    position: relative;
+    top : 50px;
 }
 
 .portfolio-image {
@@ -20,12 +30,37 @@ img {
 
 .reflections-image {
     object-fit: cover;
-    max-width: 100%;e
+    max-height: 87%;
 }
 
+.reflections-image-long {
+    object-fit: cover;
+    max-height: 87%;
+}
 .subtext {
     float: none;
     position: relative;
+}
+
+.demopage-holder {
+
+}
+
+.demopage-image {
+    width: 50%;
+    object-fit: cover;
+    border-radius: 15px;;
+}
+
+
+.EA-holder {
+
+}
+
+.EA-image {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 15px;;
 }
 
 body {
@@ -332,7 +367,26 @@ main {
     box-shadow: 0 4px 15px rgba(248, 187, 217, 0.3);
 }
 
+.try-me-btn-coco {
+    background: linear-gradient(135deg, #f8bbd9, #e8a5c4);
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 30px;
+    font-size: 1.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(248, 187, 217, 0.3);
+    margin : 2rem;
+}
+
 .try-me-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(248, 187, 217, 0.4);
+}
+
+.try-me-btn-coco:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(248, 187, 217, 0.4);
 }
@@ -354,12 +408,10 @@ main {
     height: 400px;
     background: linear-gradient(135deg, #f8bbd9, #e8a5c4);
     border-radius: 15px;
-    display: flex;
     align-items: center;
     justify-content: center;
     color: #fff;
     font-size: 1.2rem;
-    margin: 0 auto 2rem;
     box-shadow: 0 15px 35px rgba(248, 187, 217, 0.3);
 }
 
