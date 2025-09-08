@@ -19,18 +19,6 @@ function showPage(pageId) {
   }
 }
 
-function showProjectDetail() {
-  // Hide all pages
-  const pages = document.querySelectorAll(".page");
-  pages.forEach((page) => page.classList.remove("active"));
-
-  // Show project detail page
-  document.getElementById("project-detail").classList.add("active");
-
-  // Remove active class from all nav links since this is a detail page
-  const navLinks = document.querySelectorAll(".nav-link");
-  navLinks.forEach((link) => link.classList.remove("active"));
-}
 
 // Add smooth scrolling behavior
 document.addEventListener("DOMContentLoaded", function () {
