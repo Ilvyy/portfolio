@@ -194,6 +194,11 @@ main {
     margin: 0 auto;
 }
 
+.image-title-header {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 1rem;
+}
 /* About Page */
 .about-content {
     display: grid;
@@ -570,7 +575,9 @@ main {
     text-align: center;
 }
 
-.vision-item {
+
+.vision-item-sources {
+    font-size: 11px;
     background: #fff;
     padding: 2rem;
     margin-bottom: 2rem;
@@ -581,6 +588,16 @@ main {
     overflow: hidden;
 }
 
+.vision-item {
+    background: #fff;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
 .vision-item::before {
     content: "";
     position: absolute;
