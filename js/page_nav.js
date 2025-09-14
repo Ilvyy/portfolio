@@ -19,6 +19,12 @@ function showPage(pageId) {
   }
 }
 
+function gotoItem(pageId, itemId) {
+    console.log("pageId:" + pageId)
+    console.log("itemId:" + itemId)
+    showPage(pageId)
+    document.getElementById(itemId).scrollIntoView(true)
+}
 
 // Add smooth scrolling behavior
 document.addEventListener("DOMContentLoaded", function () {
